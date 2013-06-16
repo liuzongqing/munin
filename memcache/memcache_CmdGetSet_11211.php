@@ -1,12 +1,13 @@
 #!/usr/bin/php
 <?php
+	error_reporting(0);
 	$ScriptName = split("_|\.php", $argv[0]);
 	if(count($ScriptName) < 3){
 		echo "The script file name has a bad format,please keep file name format: category_title_port";
 		exit(1);
 	}
 
-	$Category = $ScriptName[0];
+	$Category = "memcache";
 	$Name = $ScriptName[1];
 	$port = $ScriptName[2];
 	$host = "127.0.0.1";
@@ -47,11 +48,12 @@
 	} elseif ($argv[1] == "config") {
 		echo "graph_title $Name\n";
 		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel $Name\n";
+		echo "graph_vlabel The count of get(+) / set(-) per second\n";
 		echo "graph_category $Category\n";
 		echo "set.label $Name\n";
 		echo "set.draw LINE2\n";
 		echo "set.type DERIVE\n";	//GAUGE,DERIVE,COUNTER,ABSOLUTE
+		echo "set.graph no\n";
 		echo "set.min 0\n";
 		echo "get.label $Name\n";
 		echo "get.draw LINE2\n";

@@ -1,12 +1,13 @@
 #!/usr/bin/php
 <?php
+	error_reporting(0);
 	$ScriptName = split("_|\.php", $argv[0]);
 	if(count($ScriptName) < 3){
 		echo "The script file name has a bad format,please keep file name format: category_title_port";
 		exit(1);
 	}
 
-	$Category = $ScriptName[0];
+	$Category = "memcache";
 	$Name = $ScriptName[1];
 	$port = $ScriptName[2];
 	$host = "127.0.0.1";
@@ -45,21 +46,25 @@
 		echo "yes";
 		exit(0);
 	} elseif ($argv[1] == "config") {
+		echo "graph_order miss hit\n";
 		echo "graph_title $Name\n";
 		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel $Name\n";
+		echo "graph_vlabel the num of hit(+) / miss(-) per second\n";
 		echo "graph_category $Category\n";
-		echo "hit.label $Name\n";
-		echo "hit.draw AREA\n";
-		echo "hit.type DERIVE\n";
 		echo "miss.label $Name\n";
 		echo "miss.draw LINE2\n";
 		echo "miss.type DERIVE\n";
-		echo "miss.negative hit\n";
+		echo "miss.graph no\n";
+		echo "miss.min 0\n";
+		echo "hit.label $Name\n";
+		echo "hit.draw LINE2\n";
+		echo "hit.type DERIVE\n";
+		echo "hit.negative miss\n";
+		echo "hit.min 0\n";
 		exit(0);
 	} else {
-		echo "get.value $get_hits\n";
 		echo "miss.value $get_misses\n";
+		echo "hit.value $get_hits\n";
 		exit(0);
 	}
 

@@ -46,24 +46,17 @@
 		echo "yes";
 		exit(0);
 	} elseif ($argv[1] == "config") {
-		echo "graph_order average current\n";
 		echo "graph_title $Name\n";
-		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel average per second / current\n";
+		echo "graph_args --base 1000\n";
+		echo "graph_vlabel Counter of Current Items\n";
 		echo "graph_category $Category\n";
-		echo "current.label current\n";
-		echo "current.draw LINE2\n";
-		echo "current.type GAUGE\n";	//GAUGE,DERIVE,COUNTER,ABSOLUTE
-		echo "current.min 0\n";
-		echo "average.label average\n";
-		echo "average.draw LINE2\n";
-		echo "average.type DERIVE\n";
-		echo "average.min 0\n";
+		echo "curr.label $Name\n";
+		echo "curr.draw LINE2\n";
+		echo "curr.type GAUGE\n";
+		echo "curr.min 0\n";
 		exit(0);
 	} else {
-		echo "average.value $total_connections\n";
-		echo "current.value $curr_connections\n";
-		exit(0);
+		echo "curr.value $curr_items\n";
 	}
 
 ?>

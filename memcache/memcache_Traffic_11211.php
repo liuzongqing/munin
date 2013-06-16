@@ -1,12 +1,13 @@
-#!/usr/local/php/bin/php
+#!/usr/bin/php
 <?php
+	error_reporting(0);
 	$ScriptName = split("_|\.php", $argv[0]);
 	if(count($ScriptName) < 3){
 		echo "The script file name has a bad format,please keep file name format: category_title_port";
 		exit(1);
 	}
 
-	$Category = $ScriptName[0];
+	$Category = "memcache";
 	$Name = $ScriptName[1];
 	$port = $ScriptName[2];
 	$host = "127.0.0.1";
@@ -45,21 +46,26 @@
 		echo "yes";
 		exit(0);
 	} elseif ($argv[1] == "config") {
+		echo "graph_order read write\n";
 		echo "graph_title $Name\n";
 		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel $Name\n";
+		echo "graph_vlabel bits read(-) / write(+) per second\n";
 		echo "graph_category $Category\n";
-		echo "total.label $Name\n";
-		echo "total.draw AREA\n";
-		echo "total.type GAUGE\n";
-		echo "curr.label $Name\n";
-		echo "curr.draw LINE2\n";
-		echo "curr.type GAUGE\n";
-		echo "curr.negative total\n";
+		echo "read.label $Name\n";
+		echo "read.draw LINE2\n";
+		echo "read.type DERIVE\n";	//GAUGE,DERIVE,COUNTER,ABSOLUTE
+		echo "read.graph no\n";
+		echo "read.min 0\n";
+		echo "write.label $Name\n";
+		echo "write.draw LINE2\n";
+		echo "write.min 0\n";
+		echo "write.type DERIVE\n";
+		echo "write.negative read\n";
 		exit(0);
 	} else {
-		echo "total.value $total_items\n";
-		echo "curr.value $curr_items\n";
+		echo "read.value $bytes_read\n";
+		echo "write.value $bytes_written\n";
+		exit(0);
 	}
 
 ?>

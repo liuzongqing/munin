@@ -1,12 +1,13 @@
-#!/usr/local/php/bin/php
+#!/usr/bin/php
 <?php
+	error_reporting(0);
 	$ScriptName = split("_|\.php", $argv[0]);
 	if(count($ScriptName) < 3){
 		echo "The script file name has a bad format,please keep file name format: category_title_port";
 		exit(1);
 	}
 
-	$Category = $ScriptName[0];
+	$Category = "memcache";
 	$Name = $ScriptName[1];
 	$port = $ScriptName[2];
 	$host = "127.0.0.1";
@@ -47,7 +48,7 @@
 	} elseif ($argv[1] == "config") {
 		echo "graph_title $Name\n";
 		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel $Name\n";
+		echo "graph_vlabel uptime\n";
 		echo "graph_category $Category\n";
 		echo "memcache.label $Name\n";
 		echo "memcache.draw LINE2\n";

@@ -40,25 +40,29 @@
 	$totalmemsize = $Stats['limit_maxbytes'];
 	$writememsize = $Stats['bytes'];
 
-	$hit_rate = round($get_hits/$cmd_get,3)*100;
-
-
 	// put data into rrd
 	if ($argv[1] == "autoconf") {
 		echo "yes";
 		exit(0);
 	} elseif ($argv[1] == "config") {
+		echo "graph_order total used\n";
 		echo "graph_title $Name\n";
 		echo "graph_args --base 1000\n";
-		echo "graph_vlabel %\n";
+		echo "graph_vlabel Total and used memory(bytes)\n";
 		echo "graph_category $Category\n";
-		echo "rate.label $Name\n";
-		echo "rate.draw LINE1\n";
-		echo "rate.type GAUGE\n";
-		echo "rate.min 0\n";
+		echo "total.label Total\n";
+		echo "total.draw AREA\n";
+		echo "total.type GAUGE\n";
+		echo "total.min 0\n";
+		echo "used.label Used\n";
+		echo "used.draw AREA\n";
+		echo "used.type GAUGE\n";
+		echo "used.min 0\n";
 		exit(0);
 	} else {
-		echo "rate.value $hit_rate\n";
+		echo "total.value $totalmemsize\n";
+		echo "used.value $writememsize\n";
+		exit(0);
 	}
 
 ?>

@@ -48,8 +48,8 @@
 	} elseif ($argv[1] == "config") {
 		echo "graph_order read write\n";
 		echo "graph_title $Name\n";
-		echo "graph_args --base 1000 -l 0\n";
-		echo "graph_vlabel bits read(-) / write(+) per second\n";
+		echo "graph_args --base 1024 -l 0\n";
+		echo "graph_vlabel Bytes read(-) / write(+) per second\n";
 		echo "graph_category $Category\n";
 		echo "read.label $Name\n";
 		echo "read.draw LINE2\n";

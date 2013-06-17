@@ -47,7 +47,7 @@
 	} elseif ($argv[1] == "config") {
 		echo "graph_order total used\n";
 		echo "graph_title $Name\n";
-		echo "graph_args --base 1000\n";
+		echo "graph_args --base 1024\n";
 		echo "graph_vlabel Total and used memory(bytes)\n";
 		echo "graph_category $Category\n";
 		echo "total.label Total\n";

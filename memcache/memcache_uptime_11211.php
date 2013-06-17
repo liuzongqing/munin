@@ -39,6 +39,8 @@
 
 	$totalmemsize = $Stats['limit_maxbytes'];
 	$writememsize = $Stats['bytes'];
+	
+	$uptime = round($uptime/86400,2);
 
 
 	// put data into rrd
@@ -51,7 +53,7 @@
 		echo "graph_vlabel uptime\n";
 		echo "graph_category $Category\n";
 		echo "memcache.label $Name\n";
-		echo "memcache.draw LINE2\n";
+		echo "memcache.draw AREA\n";
 		echo "memcache.type GAUGE\n";	//GAUGE,DERIVE,COUNTER,ABSOLUTE
 		exit(0);
 	} else {

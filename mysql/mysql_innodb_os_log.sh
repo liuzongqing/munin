@@ -31,7 +31,8 @@ elif [[ $1 == "config" ]]; then
 else
 	MYSQLADMIN="/usr/bin/mysqladmin extended-status"
 	Fsyncs=`$MYSQLADMIN | grep "Innodb_os_log_fsyncs " | awk '{print $4}'`
-	Written=`$MYSQLADMIN | grep "Innodb_os_log_written " | awk '{printf "%.2lf", $4/1024/1024}'`
+	Written=`$MYSQLADMIN | grep "Innodb_os_log_written " | awk '{printf "%.0lf", $4/1024/1024}'`
+	# It has to printf int because DERIVE type doesn't support float.
 
 	echo "fsyncs.value	${Fsyncs}"
 	echo "written.value	${Written}"

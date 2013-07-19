@@ -48,7 +48,7 @@
 		echo "evictions.min 0\n";
 		exit(0);
 	} else {
-		echo "evictions.value $bytes_read\n";
+		echo "evictions.value $evictions\n";
 		exit(0);
 	}
 
